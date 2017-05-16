@@ -1,10 +1,10 @@
 package com.lst.bbs.po;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by LiuSitong on 2017/5/8.
@@ -17,6 +17,72 @@ public class Bbsuser {
     private byte[] pic;
     private Integer pagenum;
     private String picPath;
+    private Set<Article> articals = new Set<Article>() {
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
+
+        @Override
+        public Iterator<Article> iterator() {
+            return null;
+        }
+
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(Article article) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends Article> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+    };
 
     @Id
     @Column(name = "userid")
@@ -104,5 +170,14 @@ public class Bbsuser {
         result = 31 * result + (pagenum != null ? pagenum.hashCode() : 0);
         result = 31 * result + (picPath != null ? picPath.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Set<Article> getArticals() {
+        return articals;
+    }
+
+    public void setArticals(Set<Article> articals) {
+        this.articals = articals;
     }
 }

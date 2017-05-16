@@ -2,6 +2,7 @@ package com.lst.bbs.controller;
 
 import com.lst.bbs.config.FreeMarkerConfig;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -20,7 +21,7 @@ import java.util.Map;
         name="w1",
         urlPatterns = {"/welcome"},
         initParams = {
-                @WebInitParam(name="index",value = "show.ftl")
+                @WebInitParam(name="index",value = "article?action=queryall&cur=0")
         })
 public class WelcomeController extends HttpServlet {
     private Map<String,String> forwards;
@@ -36,7 +37,10 @@ public class WelcomeController extends HttpServlet {
         //index：访问的某个页的键
         //forwards:含有键值对页的map
         //vmap:传值的map
-        FreeMarkerConfig.forward(resp,forwards.get("index"),null);
+       // FreeMarkerConfig.forward(resp,forwards.get("index"),null);
+        RequestDispatcher dispatcher=req.getRequestDispatcher(forwards.get("index"));
+
+        dispatcher.forward(req,resp);
     }
 
     @Override

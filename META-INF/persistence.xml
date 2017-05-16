@@ -3,6 +3,7 @@
 
     <persistence-unit name="persistenceUnit">
         <class>com.lst.bbs.po.Bbsuser</class>
+        <class>com.lst.bbs.po.Article</class>
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/bbs"/>
             <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>

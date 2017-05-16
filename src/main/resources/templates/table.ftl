@@ -14,13 +14,11 @@
 
 
                     <#if msg??>
-                        ${msg}
+                    ${msg}
                     <#else>
                         欢迎
                         游客！
                     </#if>
-
-
 
 
                     </strong>
@@ -47,12 +45,6 @@
             </#if>
 
 
-
-
-
-
-
-
                 <table class="table table-bordered table-striped table_vam"
                        id="dt_gal">
                     <thead>
@@ -68,31 +60,30 @@
                     </thead>
                     <tbody>
 
-
+                    <#list page.content as d>
 
                     <tr>
 
-                        <td></td>
+                        <td>${d_index+1}</td>
                         <td><a href="/upload/.jpg"
 
                                title="" class="cbox_single thumbnail">
 
-                            <img src=""
-                                 alt="" style="height: 50px; width: 50px" />
+                            <img src="user?action=pic&id=${d.user.userid}"
+                                 alt="" style="height: 50px; width: 50px"/>
 
                         </a>
 
 
-
                         </td>
                         <td>
-
+                        ${d.title}
 
                             <a
                                     href=""></a>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td>${d.content}</td>
+                        <td>${d.datetime}</td>
                         <td>
 
                             <!-- 没登陆，游客 uid=0 -->
@@ -113,7 +104,6 @@
                             </a>
 
 
-
                             <!-- 是本人贴可以删除和修改 -->
 
 
@@ -122,16 +112,14 @@
                                     title="删除本帖"><i class="icon-trash"></i></a>
 
 
-
-
-
                         </td>
 
                     </tr>
 
+                    </#list>
+
                     </tbody>
                 </table>
-
 
 
             </div>

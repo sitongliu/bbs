@@ -2,33 +2,37 @@
     <ul>
         <li>
             
-                <a href="#">首页</a>
-                <a href="#">前一页</a>
+                <a href="article?action=queryall&cur=0">首页</a>
+                <#if page.number!=0>
+                    <a href="article?action=queryall&cur=${page.number-1}">前一页</a>
+                <#--<#else>
+
+                    <a href="">前一页</a>-->
+                </#if>
 			
         </li>
+    <#list 0..page.totalPages-1 as i>
         <li>
-			
-					<a href="">前一页</a>
-			
-		</li>
+        <a href="article?action=queryall&cur=${i}">${i+1}</a>
+        </li>
+    </#list>
+
+
     	<li>
-			
-				<a href="article?action=queryall&rootid=0&curpage="></a>
+                <#if page.number!=page.totalPages-1>
+				    <a href="article?action=queryall&cur=${page.number+1}">下一页</a>
+               <#-- <#else>
+                    <a href="#">下一页</a>-->
+                </#if>
 			
         </li>
 
     	<li>
 			
-				<a href="article?action=queryall&rootid=0&curpage=">下一页</a>
-			
-        </li>
 
-    	<li>
+					<a href="article?action=queryall&cur=${page.totalPages-1}">尾页</a>
 			
-                	<a href="#">下一页</a>
-					<a href="#">尾页</a>
-			
-                <a href="article?action=queryall&rootid=0&curpage=">尾页</a>
+
 			
 
         </li>

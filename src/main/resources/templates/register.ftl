@@ -56,8 +56,8 @@
                             <div class="alert alert-info">
                                 <label for="u_fname" class="control-label">注册账号</label> <input
                                     type="text" id="u_fname" name="reusername"
-                                    class="input-xlarge" value="" onblur="checkName()"/> <strong>账号*</strong>
-                                <span id="alertmsg">请认真填写！</span>
+                                    class="input-xlarge" value="Kun Wei"/> <strong>账号*</strong>
+                                请认真填写！
                             </div>
 
 
@@ -119,8 +119,8 @@
 
 
         <div class="modal-footer">
-            <button class="btn btn-inverse pull-right" type="button" id="registerbtn"
-                    onclick="register()" disabled="disabled">注册
+            <button class="btn btn-inverse pull-right" type="button"
+                    onclick="register()">注册
             </button>
 
         </div>
