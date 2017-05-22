@@ -103,16 +103,12 @@
 
                             </a>
 
-
                             <!-- 是本人贴可以删除和修改 -->
-
-
+                          <#if user?? && user.userid==d.user.userid>
                             <a
-                                    href="article?action=del&id="
+                                    href="article?action=del&id=${d.id}"
                                     title="删除本帖"><i class="icon-trash"></i></a>
-
-
-                        </td>
+                       </#if>                  </td>
 
                     </tr>
 

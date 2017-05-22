@@ -29,8 +29,6 @@
 	</div>
 	<div class="modal-footer">
 
-
-
 			<a class="btn btn-warning" href="#login" title="登录" data-toggle="modal"
 				id="myr" data-backdrop="static" title="登录"
 				onclick="javascript:$('#rshow').modal('hide');document.getElementById('submenu').innerHTML='登录'">登录

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -68,6 +69,16 @@ public class ArticleController extends HttpServlet{
                 vmap.put("user",bbsuser);
                 FreeMarkerConfig.forward(resp,map.get("show").toString(),vmap);
                 break;
+
+            case "del" :
+                String id = req.getParameter("id");
+                //删除帖子
+                articleService.delete(Integer.parseInt(id),Integer.parseInt(id));
+                //从新走welcome来刷新页面
+                RequestDispatcher rd  =req.getRequestDispatcher("/welcome");
+                rd.forward(req,resp);
+                break;
+
         }
 
     }

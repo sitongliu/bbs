@@ -21,4 +21,9 @@ public class ArticleService {
     public Page<Article> findAll(Pageable pageable ,Integer rootid){
         return articleDao.findAll(pageable , rootid);
     }
+
+    public void delete( Integer rootid,Integer id){
+        articleDao.delete(rootid,id);
+    }
+
 }
