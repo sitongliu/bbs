@@ -27,4 +27,7 @@ public interface ArticleDao extends CrudRepository<Article,Integer> {
     @Query("delete from Article where rootid=:rootid or id=:id")
      void delete(@Param(value = "rootid") Integer rootid,@Param(value = "id") Integer id);
 
+
+
+
 }

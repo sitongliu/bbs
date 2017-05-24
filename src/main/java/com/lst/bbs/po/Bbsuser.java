@@ -1,88 +1,25 @@
 package com.lst.bbs.po;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by LiuSitong on 2017/5/8.
+ * Created by LiuSitong on 2017/5/24.
  */
 @Entity
+@DynamicInsert(value = true)
 public class Bbsuser {
     private int userid;
     private String username;
     private String password;
     private byte[] pic;
-    private Integer pagenum;
+    private int pagenum = 5;
     private String picPath;
-    private Set<Article> articals = new Set<Article>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(Object o) {
-            return false;
-        }
-
-        @Override
-        public Iterator<Article> iterator() {
-            return null;
-        }
-
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @Override
-        public <T> T[] toArray(T[] a) {
-            return null;
-        }
-
-        @Override
-        public boolean add(Article article) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(Collection<? extends Article> c) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(Collection<?> c) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-    };
+    private Set<Article> articals = new HashSet<Article>();
 
     @Id
     @Column(name = "userid")
@@ -126,11 +63,12 @@ public class Bbsuser {
 
     @Basic
     @Column(name = "PAGENUM")
-    public Integer getPagenum() {
+
+    public int getPagenum() {
         return pagenum;
     }
 
-    public void setPagenum(Integer pagenum) {
+    public void setPagenum(int pagenum) {
         this.pagenum = pagenum;
     }
 
@@ -152,10 +90,10 @@ public class Bbsuser {
         Bbsuser bbsuser = (Bbsuser) o;
 
         if (userid != bbsuser.userid) return false;
+        if (pagenum != bbsuser.pagenum) return false;
         if (username != null ? !username.equals(bbsuser.username) : bbsuser.username != null) return false;
         if (password != null ? !password.equals(bbsuser.password) : bbsuser.password != null) return false;
         if (!Arrays.equals(pic, bbsuser.pic)) return false;
-        if (pagenum != null ? !pagenum.equals(bbsuser.pagenum) : bbsuser.pagenum != null) return false;
         if (picPath != null ? !picPath.equals(bbsuser.picPath) : bbsuser.picPath != null) return false;
 
         return true;
@@ -167,7 +105,7 @@ public class Bbsuser {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(pic);
-        result = 31 * result + (pagenum != null ? pagenum.hashCode() : 0);
+        result = 31 * result + pagenum;
         result = 31 * result + (picPath != null ? picPath.hashCode() : 0);
         return result;
     }

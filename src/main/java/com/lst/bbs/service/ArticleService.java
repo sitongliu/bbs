@@ -5,7 +5,6 @@ import com.lst.bbs.po.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ArticleService {
     @Autowired
-    ArticleDao articleDao = null;
+    ArticleDao articleDao;
 
-    public Page<Article> findAll(Pageable pageable ,Integer rootid){
+    public Page<Article> findAll(Pageable pageable , Integer rootid){
+
         return articleDao.findAll(pageable , rootid);
     }
 

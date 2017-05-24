@@ -3,8 +3,6 @@ package com.lst.bbs.service;
 import com.lst.bbs.dao.IUserDao;
 import com.lst.bbs.po.Bbsuser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +12,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.net.HttpCookie;
 import java.util.HashMap;
 
 /**
@@ -27,7 +24,7 @@ public class UserService {
     private IUserDao dao = null;
     private HashMap types = new HashMap();
 
-    public Bbsuser login(String username,String userId){
+    public Bbsuser login(String username, String userId){
         return dao.login(username,userId);
     }
 

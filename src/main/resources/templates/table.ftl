@@ -21,6 +21,8 @@
                     </#if>
 
 
+
+
                     </strong>
 
                 </div>
@@ -43,6 +45,12 @@
 
 
             </#if>
+
+
+
+
+
+
 
 
                 <table class="table table-bordered table-striped table_vam"
@@ -70,9 +78,10 @@
                                title="" class="cbox_single thumbnail">
 
                             <img src="user?action=pic&id=${d.user.userid}"
-                                 alt="" style="height: 50px; width: 50px"/>
+                                 alt="" style="height: 50px; width: 50px" />
 
                         </a>
+
 
 
                         </td>
@@ -96,31 +105,31 @@
                         <#---->
                         <#--</a>-->
 
+                                <#if !user??><!--游客-->
+                                <#assign uid=999/>
+                            <#else>
+                                <#assign uid=user.userid/>
+                            </#if>
                             <a href="#rshow" title="灌水" data-toggle="modal"
                                id="myp" data-backdrop="static"
-                               onclick="">
+                               onclick="rshow(${d.id},${uid},${d.user.userid})">
                                 <i class="icon-eye-open"></i>
-
                             </a>
-
                             <!-- 是本人贴可以删除和修改 -->
-                          <#if user?? && user.userid==d.user.userid>
-                            <a
-                                    href="article?action=del&id=${d.id}"
-                                    title="删除本帖"><i class="icon-trash"></i></a>
-                       </#if>                  </td>
 
+                            <#if user?? && user.userid==d.user.userid>
+
+                                <a
+                                        href="article?action=del&id=${d.id}"
+                                        title="删除本帖"><i class="icon-trash"></i></a>
+                            </#if>
+                        </td>
                     </tr>
-
                     </#list>
-
                     </tbody>
                 </table>
-
-
             </div>
         </div>
-
     <#include "page.ftl">
 
 

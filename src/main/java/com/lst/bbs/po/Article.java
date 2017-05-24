@@ -1,17 +1,17 @@
 package com.lst.bbs.po;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
- * Created by LiuSitong on 2017/5/14.
+ * Created by LiuSitong on 2017/5/24.
  */
 @Entity
 public class Article {
     private int id;
     private int rootid;
     private String content;
-    private Timestamp datetime;
+    private Date datetime;
     private String title;
     private Bbsuser user;
 
@@ -47,11 +47,11 @@ public class Article {
 
     @Basic
     @Column(name = "datetime")
-    public Timestamp getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Timestamp datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

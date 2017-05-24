@@ -6,6 +6,7 @@ import com.lst.bbs.service.UserService;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -31,7 +32,7 @@ import java.util.HashMap;
 public class UserController extends HttpServlet {
 
     @Autowired
-    UserService service;
+    UserService service = new UserService();
     HashMap<String, String> map = new HashMap<String, String>();
 
 
@@ -54,8 +55,16 @@ public class UserController extends HttpServlet {
                 vmap = new HashMap<String, Object>();
                 service.save(bbsuser);
                 vmap.put("msg", bbsuser.getUsername() + "注册成功！");
-                FreeMarkerConfig.forward(resp, map.get("show").toString(), vmap);
+               // FreeMarkerConfig.forward(resp, map.get("show").toString(), vmap);
+                RequestDispatcher dispatcher=req.getRequestDispatcher("/welcome");
 
+                try {
+                    dispatcher.forward(req,resp);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -113,28 +122,34 @@ public class UserController extends HttpServlet {
 
 
     public void login(HttpServletRequest req, HttpServletResponse resp) {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        HashMap<String, Object> vmap = null;
-        Bbsuser bbsuser = service.login(username, password);
-        if (bbsuser != null) { // 如果查出存在用户的话  保存cookie
-            String cookie = req.getParameter("sun");
-            if (cookie != null) {  //判断已经勾选了记住cookie的按钮
-                Cookie uc = new Cookie("papaoku", username);
-                uc.setMaxAge(3600 * 24 * 7);
+        String username=req.getParameter("username");
+        String password=req.getParameter("password");
+        HashMap<String,Object> vmap=null;
+        Bbsuser user=service.login(username,password);
+        if(user!=null){
+            //要处理，cookie
+
+            String sun=req.getParameter("sun");
+            if(sun!=null){//勾上了，记住一星期
+                Cookie uc=new Cookie("papaoku",username);
+                uc.setMaxAge(3600*24*7);
                 resp.addCookie(uc);
-
-                Cookie pc = new Cookie("papaokp", password);
-                pc.setMaxAge(3600 * 24 * 7);
-                resp.addCookie(pc);
-
+                Cookie up=new Cookie("papaokp",password);
+                up.setMaxAge(3600*24*7);
+                resp.addCookie(up);
             }
+            //
+            req.getSession().setAttribute("user",user);
 
-            vmap = new HashMap<String, Object>();
-            vmap.put("msg", username + "登录成功");
-            vmap.put("user", bbsuser);
-            FreeMarkerConfig.forward(resp, map.get("show").toString(), vmap);
+            RequestDispatcher dispatcher=req.getRequestDispatcher("/welcome");
 
+            try {
+                dispatcher.forward(req,resp);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
